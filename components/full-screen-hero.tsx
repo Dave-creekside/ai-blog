@@ -1,33 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 
 export function FullScreenHero() {
-  const [isMounted, setIsMounted] = useState(false)
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted) {
-    // Return a simple placeholder during SSR
-    return (
-      <section className="relative h-screen w-full flex items-center">
-        <div className="container mx-auto px-4 z-10">
-          <div className="max-w-2xl pt-16">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Brainsplosions <span className="text-purple-500">Quantum Intelligence</span>
-            </h1>
-            <p className="text-gray-400 text-lg md:text-xl mt-6">
-              Deep insights into Quantum AI, GenAI, and Cognitive Computing advancements.
-            </p>
-          </div>
-        </div>
-      </section>
-    )
-  }
 
   return (
     <section className="relative h-screen w-full flex items-center">
@@ -66,7 +42,7 @@ export function FullScreenHero() {
             </motion.span>
           </h1>
           <p className="text-gray-300 text-lg md:text-xl mt-6">
-            My conceptual Ideas, Projects, and Papers on Quantum AI, GenAI, and Cognitive Computing.
+            Quantum AI, GenAI, and Cognitive Computing research at Clockwork.earth.
           </p>
         </motion.div>
       </div>

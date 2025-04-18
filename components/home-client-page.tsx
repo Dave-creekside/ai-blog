@@ -209,7 +209,7 @@ export function HomeClientPage({ articles }: HomeClientPageProps) {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>contact@neuralpulse.ai</span>
+                  <span>mycatisbetterthanyours@proton.me</span>
                 </li>
               </ul>
             </div>

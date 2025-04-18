@@ -163,8 +163,8 @@ body {
   z-index: -1;
 }
 
-/* Mobile-specific styles */ \
-@media (max-width: 767px}) {
+/* Mobile-specific styles */
+@media (max-width: 767px) {
   /* Ensure hamburger menu is always visible */
   .mobile-menu-button {
     display: block !important;
