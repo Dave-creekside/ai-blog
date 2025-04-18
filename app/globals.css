@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 267 100% 61%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 267 100% 61%;
+  --header-height: 72px; /* Define header height variable */
+  --menu-glow-color: rgba(139, 92, 246, 0.3); /* Purple glow color with transparency */
+  --vh: 1vh;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: black;
+  color: white;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Hero image enhancements */
+.aurora-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Fixed header styles */
+.fixed-header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fixed-header.scrolled {
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Full-screen hero styles */
+.hero-section {
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+  /* If the original padding was something like padding-top: 5rem; */
+  /* Then reduce it by 20% to padding-top: 4rem; */
+  padding-top: 4rem; /* Adjust this value based on your original padding */
+}
+
+/* If you have a specific class for the hero content container */
+.hero-content {
+  /* Reduce the top margin or padding by 20% */
+  padding-top: 4rem; /* Adjust based on your original value */
+}
+
+/* Ensure text readability */
+.hero-text {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+  padding-top: var(--header-height);
+}
+
+/* Content padding for fixed header */
+.content-with-fixed-header {
+  padding-top: var(--header-height);
+}
+
+/* Only apply padding to non-hero sections */
+.non-hero-content {
+  padding-top: var(--header-height);
+}
+
+/* Add these styles to enhance the mobile menu popup appearance */
+
+/* Mobile menu popup styles */
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu-popup {
+  animation: menuFadeIn 0.2s ease-out;
+  border-radius: 0.75rem; /* Slightly more rounded corners (rounded-xl) */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4), 0 0 15px var(--menu-glow-color); /* Add subtle purple glow */
+}
+
+/* Add a subtle pulse animation to the glow */
+@keyframes subtleGlowPulse {
+  0% {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4), 0 0 15px var(--menu-glow-color);
+  }
+  50% {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4), 0 0 20px var(--menu-glow-color);
+  }
+  100% {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4), 0 0 15px var(--menu-glow-color);
+  }
+}
+
+.menu-glow-effect {
+  animation: subtleGlowPulse 3s ease-in-out infinite;
+}
+
+/* Add a subtle arrow/triangle to the popup menu */
+.menu-arrow::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 16px;
+  height: 16px;
+  background-color: rgb(17, 24, 39); /* bg-gray-900 */
+  transform: rotate(45deg);
+  border-left: 1px solid rgb(31, 41, 55); /* border-gray-800 */
+  border-top: 1px solid rgb(31, 41, 55); /* border-gray-800 */
+  z-index: -1;
+}
+
+/* Mobile-specific styles */ \
+@media (max-width: 767px}) {
+  /* Ensure hamburger menu is always visible */
+  .mobile-menu-button {
+    display: block !important;
+    position: relative;
+    z-index: 50;
+  }
+
+  /* Ensure header is always fixed */
+  .fixed-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Adjust content padding */
+  .non-hero-content {
+    padding-top: var(--header-height);
+  }
+}
+
+/* Ensure proper spacing on all devices */
+@media (min-width: 768px) {
+  .non-hero-content {
+    padding-top: var(--header-height);
+  }
+}
+
+.min-h-screen {
+  min-height: 100vh; /* Fallback */
+  min-height: calc(var(--vh, 1vh) * 100);
+}
