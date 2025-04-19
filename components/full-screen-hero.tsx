@@ -42,7 +42,7 @@ export function FullScreenHero() {
             </motion.span>
           </h1>
           <p className="text-gray-300 text-lg md:text-xl mt-6">
-            Quantum AI, GenAI, and Cognitive Computing research at Clockwork.earth.
+            Quantum AI, GenAI, and Cognitive Computing on a budget.
           </p>
         </motion.div>
       </div>
