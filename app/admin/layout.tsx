@@ -26,7 +26,7 @@ export default async function AdminLayout({
       <div className="w-64 bg-gray-900 border-r border-gray-800 p-4 flex flex-col">
         <div className="mb-8">
           <Link href="/" className="text-xl font-bold tracking-tighter">
-            Neural<span className="text-purple-500">Pulse</span>
+            Clockwork<span className="text-purple-500">.earth</span>
           </Link>
           <div className="text-sm text-gray-400 mt-1">Admin Dashboard</div>
         </div>

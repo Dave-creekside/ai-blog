@@ -1,22 +1,23 @@
 import type React from "react"
 import "./globals.css"
 import { Inter } from "next/font/google"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Toaster } from "@/components/ui/toaster"
 import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
+
 export const metadata: Metadata = {
   title: "Clockwork.earth - Quantum AI, GenAI, Cognitive Computing, & Deep Learning Blog",
   description: "Exploring the frontiers of quantum intelligence, generative AI, and cognitive computing.",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
