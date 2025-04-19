@@ -8,10 +8,19 @@ import { redirect } from "next/navigation"
 import type { Article } from "@/types/article"
 
 // Initialize storage when the server starts
-initializeStorage()
+// Only initialize if supabaseAdmin is available
+if (supabaseAdmin) {
+  initializeStorage()
+}
 
 // Update the createArticleWithFile function to include the new fields
 export async function createArticleWithFile(formData: FormData) {
+  // If Supabase admin client is not initialized (missing env vars), return error
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { error: "Database connection not available. Check environment variables." }
+  }
+
   try {
     const title = formData.get("title") as string
     const description = formData.get("description") as string
@@ -76,6 +85,12 @@ export async function createArticleWithFile(formData: FormData) {
 
 // Update the updateArticleWithFile function to include the new fields
 export async function updateArticleWithFile(formData: FormData) {
+  // If Supabase admin client is not initialized (missing env vars), return error
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { error: "Database connection not available. Check environment variables." }
+  }
+
   try {
     const id = formData.get("id") as string
     const title = formData.get("title") as string
@@ -151,6 +166,12 @@ export async function updateArticleWithFile(formData: FormData) {
 
 // Keep the existing functions but update them as needed
 export async function createArticle(formData: FormData) {
+  // If Supabase admin client is not initialized (missing env vars), return error
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { error: "Database connection not available. Check environment variables." }
+  }
+
   try {
     const title = formData.get("title") as string
     const description = formData.get("description") as string
@@ -193,6 +214,12 @@ export async function createArticle(formData: FormData) {
 }
 
 export async function updateArticle(formData: FormData) {
+  // If Supabase admin client is not initialized (missing env vars), return error
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { error: "Database connection not available. Check environment variables." }
+  }
+
   try {
     const id = formData.get("id") as string
     const title = formData.get("title") as string
@@ -241,6 +268,12 @@ export async function updateArticle(formData: FormData) {
 
 // Keep the rest of the functions unchanged
 export async function deleteArticle(id: string) {
+  // If Supabase admin client is not initialized (missing env vars), return error
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { error: "Database connection not available. Check environment variables." }
+  }
+
   try {
     // Get the article to find the PDF path
     const { data: article, error: fetchError } = await supabaseAdmin
@@ -274,6 +307,12 @@ export async function deleteArticle(id: string) {
 }
 
 export async function getAdminArticles(): Promise<Article[]> {
+  // If Supabase admin client is not initialized (missing env vars), return empty array
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return []
+  }
+
   const { data, error } = await supabaseAdmin.from("articles").select("*").order("published_date", { ascending: false })
 
   if (error) {
@@ -285,6 +324,12 @@ export async function getAdminArticles(): Promise<Article[]> {
 }
 
 export async function getArticleById(id: string): Promise<Article | null> {
+  // If Supabase admin client is not initialized (missing env vars), return null
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return null
+  }
+
   const { data, error } = await supabaseAdmin.from("articles").select("*").eq("id", id).single()
 
   if (error) {
@@ -296,6 +341,12 @@ export async function getArticleById(id: string): Promise<Article | null> {
 }
 
 export async function getCategories(): Promise<string[]> {
+  // If Supabase admin client is not initialized (missing env vars), return empty array
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return []
+  }
+
   const { data, error } = await supabaseAdmin.from("articles").select("category")
 
   if (error) {
@@ -309,6 +360,12 @@ export async function getCategories(): Promise<string[]> {
 }
 
 export async function getArticleStats() {
+  // If Supabase admin client is not initialized (missing env vars), return empty stats
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { totalArticles: 0, categoryCounts: [], recentArticles: [] }
+  }
+
   try {
     // Get total article count
     const { count: totalArticles, error: countError } = await supabaseAdmin

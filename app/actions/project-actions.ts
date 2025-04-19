@@ -8,6 +8,12 @@ import type { Article } from "@/types/article"
  * Uses the is_project column to filter projects
  */
 export async function getProjects(): Promise<Article[]> {
+  // If Supabase client is not initialized (missing env vars), return empty array
+  if (!supabase) {
+    console.warn("Supabase client not initialized. Check environment variables.")
+    return []
+  }
+
   try {
     const { data, error } = await supabase
       .from("article_view")
@@ -31,6 +37,12 @@ export async function getProjects(): Promise<Article[]> {
  * Fetches a specific project by ID
  */
 export async function getProjectById(id: string): Promise<Article | null> {
+  // If Supabase client is not initialized (missing env vars), return null
+  if (!supabase) {
+    console.warn("Supabase client not initialized. Check environment variables.")
+    return null
+  }
+
   try {
     const { data, error } = await supabase.from("article_view").select("*").eq("id", id).eq("is_project", true).single()
 
@@ -50,6 +62,12 @@ export async function getProjectById(id: string): Promise<Article | null> {
  * Fetches projects by category
  */
 export async function getProjectsByCategory(category: string): Promise<Article[]> {
+  // If Supabase client is not initialized (missing env vars), return empty array
+  if (!supabase) {
+    console.warn("Supabase client not initialized. Check environment variables.")
+    return []
+  }
+
   try {
     const { data, error } = await supabase
       .from("article_view")
@@ -74,6 +92,12 @@ export async function getProjectsByCategory(category: string): Promise<Article[]
  * Fetches featured projects (limit to 3)
  */
 export async function getFeaturedProjects(): Promise<Article[]> {
+  // If Supabase client is not initialized (missing env vars), return empty array
+  if (!supabase) {
+    console.warn("Supabase client not initialized. Check environment variables.")
+    return []
+  }
+
   try {
     const { data, error } = await supabase
       .from("article_view")

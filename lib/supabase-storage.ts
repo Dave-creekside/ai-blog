@@ -5,6 +5,12 @@ const BUCKET_NAME = "pdf-articles"
 
 // Initialize storage bucket if it doesn't exist
 export async function initializeStorage() {
+  // If Supabase admin client is not initialized (missing env vars), return
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return
+  }
+
   const { data: buckets } = await supabaseAdmin.storage.listBuckets()
 
   if (!buckets?.find((bucket) => bucket.name === BUCKET_NAME)) {
@@ -22,6 +28,12 @@ export async function initializeStorage() {
 
 // Upload PDF file to Supabase storage
 export async function uploadPDF(file: File): Promise<{ path: string; url: string } | null> {
+  // If Supabase admin client is not initialized (missing env vars), return null
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return null
+  }
+
   try {
     const fileExt = file.name.split(".").pop()
     const fileName = `${uuidv4()}.${fileExt}`
@@ -48,6 +60,12 @@ export async function uploadPDF(file: File): Promise<{ path: string; url: string
 
 // Delete PDF file from Supabase storage
 export async function deletePDF(filePath: string): Promise<boolean> {
+  // If Supabase admin client is not initialized (missing env vars), return false
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return false
+  }
+
   try {
     const { error } = await supabaseAdmin.storage.from(BUCKET_NAME).remove([filePath])
 

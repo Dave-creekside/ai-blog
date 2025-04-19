@@ -3,6 +3,15 @@
 import { supabaseAdmin } from "@/lib/supabase-server"
 
 export async function runProjectMigration() {
+  // If Supabase admin client is not initialized (missing env vars), return error
+  if (!supabaseAdmin) {
+    console.warn("Supabase admin client not initialized. Check environment variables.")
+    return { 
+      success: false, 
+      error: "Supabase admin client not initialized. Check environment variables." 
+    }
+  }
+
   try {
     // Check if the is_project column already exists
     const { data: columnExists, error: checkError } = await supabaseAdmin

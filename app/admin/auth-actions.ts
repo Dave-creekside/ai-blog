@@ -9,8 +9,14 @@ export async function signIn(formData: FormData) {
   const password = formData.get("password") as string
 
   const cookieStore = cookies()
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  // Check if Supabase credentials are available
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn("Supabase credentials not found. Check environment variables.")
+    return { error: "Authentication service not available. Please contact the administrator." }
+  }
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
@@ -40,8 +46,14 @@ export async function signIn(formData: FormData) {
 
 export async function signOut() {
   const cookieStore = cookies()
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  // Check if Supabase credentials are available
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn("Supabase credentials not found. Check environment variables.")
+    redirect("/admin/login")
+  }
 
   const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     cookies: {

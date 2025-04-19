@@ -1,26 +1,65 @@
-# NeuralPulse - AI Blog
+# AI Blog
 
-NeuralPulse is a modern, responsive blog focused on AI, GenAI, Computer Vision, and Deep Learning topics. This project is built with Next.js and designed to be deployed on GitHub Pages.
+A Next.js blog application with Supabase integration.
 
-## Features
+## Deployment Fix
 
-- Responsive design with a dark, aesthetic theme
-- Featured articles section
-- Recent posts grid
-- Newsletter subscription form
-- Topic categorization
-- Detailed blog post pages
+This repository includes fixes for deployment issues on Vercel related to missing Supabase environment variables. The application now gracefully handles the absence of Supabase credentials by:
 
-## Getting Started
+1. Checking for the presence of environment variables before initializing Supabase clients
+2. Providing fallback behavior when Supabase is not available
+3. Displaying appropriate error messages to users
 
-### Prerequisites
+These changes allow the application to build and deploy successfully even when environment variables are not properly configured, while still providing clear guidance on what needs to be fixed.
 
-- Node.js 18 or later
-- npm or yarn
+## Deployment Instructions
 
-### Installation
+### Setting up Environment Variables in Vercel
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/neural-pulse.git
-   cd neural-pulse
+This application requires Supabase environment variables to be set up in your Vercel project. Follow these steps to configure them:
+
+1. Log in to your Vercel dashboard
+2. Select your project
+3. Go to the "Settings" tab
+4. Click on "Environment Variables"
+5. Add the following environment variables:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+```
+
+You can find these values in your Supabase project dashboard under "Project Settings" > "API".
+
+### Local Development
+
+For local development, create a `.env.local` file in the root of your project with the same environment variables:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+```
+
+## Running the Application
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run the development server
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Building for Production
+
+```bash
+# Build the application
+pnpm build
+
+# Start the production server
+pnpm start
+```
