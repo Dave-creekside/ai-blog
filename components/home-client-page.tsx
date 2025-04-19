@@ -101,16 +101,16 @@ export function HomeClientPage({ articles }: HomeClientPageProps) {
                 news.
               </p>
             </div>
-            <form className="flex gap-2">
+            <form className="flex flex-col gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-black border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full px-4 py-2 bg-black border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
                 required
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md whitespace-nowrap"
+                className="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md whitespace-nowrap"
               >
                 Subscribe
               </button>
